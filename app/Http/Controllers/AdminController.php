@@ -65,6 +65,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
+
         return view('admin.edit')->with('student', $student);
     }
     public function update(Request $request, $id)
@@ -97,7 +98,7 @@ class AdminController extends Controller
 
             return redirect('/dashboard')->with('success', 'User Details Updated!');
         } catch (\Exception $e) {
-            return redirect('/student/'.$id.'/edit')->with('errors', $e->errors());
+            return redirect('/student/edit/' . $id)->with('errors', $e->errors());
         }
     }
     public function destroy($id)

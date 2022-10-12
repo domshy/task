@@ -26,6 +26,6 @@ Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 Route::get('/add-student', 'AdminController@create')->name('create');
 
 Route::post('/add-student', 'AdminController@store')->name('create');
-Route::get('/student/{id}/edit', 'AdminController@edit')->name('edit');
-Route::post('/student/{id}', 'AdminController@update')->name('update');
-Route::post('/student/{id}', 'AdminController@destroy')->name('destroy');
+Route::get('/student/edit/{id}', 'AdminController@edit')->name('edit');
+Route::post('/student/update/{id}', 'AdminController@update')->name('update');
+Route::post('/student/destry/{id}', 'AdminController@destroy')->name('destroy');

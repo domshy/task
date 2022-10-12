@@ -41,7 +41,7 @@
                                             <td>{{ $student->address }}</td>
                                             <td>{{ $student->email }}</td>
                                             <td>
-                                                <a href="/student/{{ $student->id }}/edit"
+                                                <a href="/student/edit/{{ $student->id }}"
                                                     class="btn btn-default">Edit</a>
                                                 {!! Form::open([
                                                     'action' => ['AdminController@destroy', $student->id],
@@ -49,7 +49,6 @@
                                                     'class' => 'pull-right',
                                                 ]) !!}
 
-                                                {{-- {{ Form::hidden('_method', 'DELETE') }} &nbsp; --}}
                                                 {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
 
                                                 {!! Form::close() !!}
