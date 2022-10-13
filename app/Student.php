@@ -18,7 +18,6 @@ class Student extends Model
         'birth_place',
         'gender',
         'dob',
-        'age',
         'contact',
         'email',
         'address',
@@ -35,11 +34,11 @@ class Student extends Model
         $records = DB::table('students')->select(
 
             'role',
+            'student_no',
             'fullname',
             'birth_place',
             'gender',
             'dob',
-            'age',
             'contact',
             'email',
             'address',

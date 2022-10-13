@@ -8,12 +8,23 @@
                         </h3>
                         <br /><br />
                         <a href="/add-student" class="btn btn-primary">Add Student</a>
-                        <a href="/download-pdf" class="btn btn-success">Download as PDF</a>
-                        <a href="/export-csv" class="btn btn-danger">Download as CSV</a>
-                        <a href="/export-excel" class="btn btn-warning">Download as EXCEL</a>
+                        <a href="/students/view-pdf" class="btn btn-success">View PDF</a>
+                        <a href="/students/download-pdf" class="btn btn-success">Download as PDF</a>
+                        <a href="/students/download-excel" class="btn btn-danger">Download as Excel</a>
+                        <a href="/students/download-csv" class="btn btn-warning">Download as CSV</a>
                     </div>
 
                     <div class="box-body">
+                        <form action="students/import" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <br />
+                                <label for="file">Import File</label>
+                                <input type="file" name="file" class="form-control" style="width: 50%"/>
+                            </div>
+                            <input type="submit" class="btn btn-success" />
+                        </form>
+
                         @if (count($students) > 0)
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>

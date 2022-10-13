@@ -33,8 +33,8 @@ class AdminController extends Controller
             'birth_place' => ['required', 'string'],
             'gender' => 'required',
             'dob' => 'date_format:Y-m-d|before:today|nullable',
-            'contact' => 'required|integer',
-            'email' => ['required', 'regex:/.+@(gmail|yahoo)\.com$/', 'unique:users'],
+            'contact' => ['required', 'regex:/^(09)\\d{9}$/'],
+            'email' => ['required', 'regex:/.+@(gmail|yahoo)\.com$/', 'unique:students'],
             // 'password' => ['required', 'min:8', 'confirmed'],
             'address' => ['required', 'max:255', 'min:10']
         ]);
@@ -78,7 +78,7 @@ class AdminController extends Controller
                 'gender' => ['required'],
                 'dob' => ['date_format:Y-m-d', 'before:today', 'nullable'],
                 'contact' => ['required', 'regex:/^(09)\\d{9}$/'],
-                'email' => ['required', 'regex:/(.+)@(.+)\.(.+)/i'],
+                'email' => ['required', 'regex:/.+@(gmail|yahoo)\.com$/', 'unique:students'],
                 // 'password' => ['required', 'min:8', 'confirmed'],
                 'address' => ['required', 'max:255']
             ]);
