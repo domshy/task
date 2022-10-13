@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function index()
     {
         $students = Student::where('user_id', auth()->user()->id)->orderBy('student_no', 'asc')->get();
-        return view('dashboard', compact('students'));
+        return view('/dashboard', compact('students'));
     }
     public function create()
     {
@@ -39,7 +39,7 @@ class AdminController extends Controller
             'address' => ['required', 'max:255', 'min:10']
         ]);
 
-        $student_no = Helper::IDGenerator(new Student,  'student_no', 7, 'STDNT');
+        $student_no = Helper::IDGenerator(new Student,  'student_no', 7, '2022A');
 
         $student = new Student;
         $student->role = "student";
@@ -55,7 +55,7 @@ class AdminController extends Controller
         $student->student_no = $student_no;
         $student->save();
 
-        return redirect('/dashboard')->with('success', 'User Added');
+        return redirect('/admin/dashboard')->with('success', 'User Added');
     }
     public function show($id)
     {
@@ -98,13 +98,13 @@ class AdminController extends Controller
 
             return redirect('/dashboard')->with('success', 'User Details Updated!');
         } catch (\Exception $e) {
-            return redirect('/student/edit/' . $id)->with('errors', $e->errors());
+            return redirect('/admin/student/edit/' . $id)->with('errors', $e->errors());
         }
     }
     public function destroy($id)
     {
         $student = Student::find($id);
         $student->delete();
-        return redirect('/dashboard')->with('success', 'User Deleted!');
+        return redirect('/admin/dashboard')->with('success', 'User Deleted!');
     }
 }

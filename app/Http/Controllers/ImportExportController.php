@@ -36,17 +36,23 @@ class ImportExportController extends Controller
         return Excel::download(new StudentExport, 'students.csv');
     }
 
-    public function show()
+    public function importView()
     {
         return view('components.tables');
     }
 
-    public function store(Request $request)
+    public function importFile(Request $request)
     {
-        $file = $request->file('file');
 
-        Excel::import(new StudentImport, $file);
+        $file = $request->file('file')->store('import');
 
-        return back()->withStatus('Excel File imported successfully!');
+        $import = new StudentImport;
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+        
+       return back()->withStatus('File imported successfully');
     }
 }

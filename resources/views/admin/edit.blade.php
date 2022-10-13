@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/dashboard" class="btn btn-default">Go Back</a>
+    <a href="/admin/dashboard" class="btn btn-default">Go Back</a>
     @if (count($errors) > 0)
         @foreach ($errors as $error)
             @foreach ($error as $e)

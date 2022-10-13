@@ -6,10 +6,19 @@ use App\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
-class StudentImport implements ToModel, WithHeadingRow
+class StudentImport implements ToModel, WithHeadingRow, SkipsOnError, WithValidation, SkipsOnFailure
 {
+    use Importable, SkipsErrors, SkipsFailures;
     /**
      * @param array $row
      *
@@ -18,8 +27,9 @@ class StudentImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $student = new Student;
-        $stdnt = Helper::IDGenerator($student, 'student_no', 6, date('Y'));
+        $stdnt = Helper::IDGenerator($student, 'student_no', 6, Student::PREFIX);
 
+        // dd($stdnt);
         return [
             new Student([
                 'role' => 'student',
@@ -51,7 +61,7 @@ class StudentImport implements ToModel, WithHeadingRow
     function rules(): array
     {
         return [
-            '*.email' => ['email', 'unique:students,email'],
+            '*.email' => ['email', 'unique:students,email', 'regex:/.+@(gmail|yahoo)\.com$/'],
         ];
     }
 }

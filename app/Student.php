@@ -11,6 +11,7 @@ class Student extends Model
     protected $table = 'students';
     public $primaryKey = 'id';
     public $timestamps = true;
+    const PREFIX = "2022A";
 
     protected $fillable = [
         'role',
@@ -21,7 +22,8 @@ class Student extends Model
         'contact',
         'email',
         'address',
-        'user_id'
+        'user_id',
+        'student_no'
     ];
 
     public function user()
@@ -42,7 +44,8 @@ class Student extends Model
             'contact',
             'email',
             'address',
-            'user_id'
+            'user_id',
+            'student_no'
         )->get()->toArray();
         return $records;
     }

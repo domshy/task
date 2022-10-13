@@ -3,24 +3,70 @@
         <div class="box">
             <div class="box-body">
                 <div class="box">
+
+                    <div style="alert alert-success alert-dismissible fade show" role="alert">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                        @endif
+                    </div>
+
+                    <div style="alert alert-warning alert-dismissible fade show" role="alert">
+                        @if (isset($errors) && $errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                @endforeach
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                        @endif
+                        @if (session()->has('failures'))
+                            <table class="table table-danger">
+                                <tr>
+                                    <th>Row</th>
+                                    <th>Attribute</th>
+                                    <th>Error/s</th>
+                                    <th>Values</th>
+                                </tr>
+
+                                @foreach (session()->get('failures') as $validation)
+                                    <tr>
+                                        <td>{{ $validation->row() }}</td>
+                                        <td>{{ $validation->attribute() }}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ($validation->errors() as $e)
+                                                    <li>{{ $e }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            {{ $validation->values()[$validation->attribute()] }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                        @endif
+                    </div>
+
                     <div class="box-header">
                         {{-- <h3 class="box-title">Total of Student: {{ $total }}    --}}
                         </h3>
                         <br /><br />
-                        <a href="/add-student" class="btn btn-primary">Add Student</a>
-                        <a href="/students/view-pdf" class="btn btn-success">View PDF</a>
-                        <a href="/students/download-pdf" class="btn btn-success">Download as PDF</a>
-                        <a href="/students/download-excel" class="btn btn-danger">Download as Excel</a>
-                        <a href="/students/download-csv" class="btn btn-warning">Download as CSV</a>
+                        <a href="/admin/add-student" class="btn btn-primary">Add Student</a>
+                        <a href="/admin/students/view-pdf" class="btn btn-success">View PDF</a>
+                        <a href="/admin/students/download-pdf" class="btn btn-success">Download as PDF</a>
+                        <a href="/admin/students/download-excel" class="btn btn-danger">Download as Excel</a>
+                        <a href="/admin/students/download-csv" class="btn btn-warning">Download as CSV</a>
                     </div>
 
+
                     <div class="box-body">
-                        <form action="students/import" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/students/import" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <br />
                                 <label for="file">Import File</label>
-                                <input type="file" name="file" class="form-control" style="width: 50%"/>
+                                <input type="file" name="file" class="form-control" style="width: 50%" />
                             </div>
                             <input type="submit" class="btn btn-success" />
                         </form>
@@ -52,7 +98,7 @@
                                             <td>{{ $student->address }}</td>
                                             <td>{{ $student->email }}</td>
                                             <td>
-                                                <a href="/student/edit/{{ $student->id }}"
+                                                <a href="/admin/student/edit/{{ $student->id }}"
                                                     class="btn btn-default">Edit</a>
                                                 {!! Form::open([
                                                     'action' => ['AdminController@destroy', $student->id],
@@ -69,7 +115,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <p>No student found</p>
+                            <p>No student's data yet</p>
                         @endif
                     </div>
                 </div>

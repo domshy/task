@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/dashboard" class="btn btn-default">Go Back</a>
+    <a href="/admin/dashboard" class="btn btn-default">Go Back</a>
     <hr />
     <h1>ADD USER</h1>
     @if ($errors->any())

@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('birth_place');
             $table->string('gender');
             $table->string('dob');
-            $table->mediumInteger('contact');
+            $table->string('contact');
             $table->string('email')->unique();
             $table->mediumText('address');
             $table->string('role');
