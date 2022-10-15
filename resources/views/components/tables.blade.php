@@ -80,6 +80,7 @@
                                         <th>Gender</th>
                                         <th>Place of Birth</th>
                                         <th>Birthday</th>
+                                        <th>Age</th>
                                         <th>Contact</th>
                                         <th>Address</th>
                                         <th>Email</th>
@@ -90,25 +91,28 @@
                                     @foreach ($students as $student)
                                         <tr>
                                             <td>{{ $student->student_no }}</td>
-                                            <td>{{ $student->fullname }}</td>
+                                            <td>{{ $student->fname . $student->middlename . $student->lname }}</td>
                                             <td>{{ $student->gender }}</td>
                                             <td>{{ $student->birth_place }}</td>
                                             <td>{{ $student->dob }}</td>
+                                            <td>{{ $student->age }}</td>
                                             <td>{{ $student->contact }}</td>
                                             <td>{{ $student->address }}</td>
                                             <td>{{ $student->email }}</td>
                                             <td>
                                                 <a href="/admin/student/edit/{{ $student->id }}"
                                                     class="btn btn-default">Edit</a>
-                                                {!! Form::open([
-                                                    'action' => ['AdminController@destroy', $student->id],
-                                                    'method' => 'POST',
-                                                    'class' => 'pull-right',
-                                                ]) !!}
+                                                    
+                                                    @include('sweetalert::alert')
+                                                <form method="POST"
+                                                    action="{{ action('AdminController@destroy', $student->id) }}">
+                                                    @csrf
+                                                    {{-- <input name="_method" type="hidden" value="DELETE"> --}}
+                                                    <button type="submit"
+                                                        class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm"
+                                                        data-toggle="tooltip" title='Delete'>Delete</button>
+                                                </form>
 
-                                                {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-
-                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -15,7 +15,9 @@ class Student extends Model
 
     protected $fillable = [
         'role',
-        'fullname',
+        'fname',
+        'middlename',
+        'lname',
         'birth_place',
         'gender',
         'dob',
@@ -23,7 +25,9 @@ class Student extends Model
         'email',
         'address',
         'user_id',
-        'student_no'
+        'student_no',
+        'age',
+        'password'
     ];
 
     public function user()
@@ -37,7 +41,9 @@ class Student extends Model
 
             'role',
             'student_no',
-            'fullname',
+            'fname',
+            'middlename',
+            'lname',
             'birth_place',
             'gender',
             'dob',
@@ -45,7 +51,8 @@ class Student extends Model
             'email',
             'address',
             'user_id',
-            'student_no'
+            'student_no',
+            'age'
         )->get()->toArray();
         return $records;
     }

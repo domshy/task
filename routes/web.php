@@ -44,9 +44,17 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/students/import', 'ImportExportController@importFile')->name('import-excel');
 
     //announcement
-    
+    Route::get('/announcement', 'AnnouncementController@index')->name('announcement');
+    // Route::get('/create-announcement', 'AnnouncementController@store')->name('create-announcement')->name('create-announcement');
+    Route::post('/create-announcement', 'AnnouncementController@store')->name('create-announcement');
+    Route::get('view-announcement', 'AnnouncementController@show')->name('view-announcement');
+
+    //profile
+    Route::get('/profile', 'AdminController@viewprofile')->name('profile');
+
+    //charts
+    Route::get('/charts', 'ChartController@index')->name('charts');
 });
 
-Route::prefix('student')->middleware('auth')->group(function() {
-    
+Route::prefix('student')->middleware('auth')->group(function () {
 });

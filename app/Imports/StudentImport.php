@@ -33,14 +33,18 @@ class StudentImport implements ToModel, WithHeadingRow, SkipsOnError, WithValida
         return [
             new Student([
                 'role' => 'student',
-                'fullname' => $row['fullname'],
+                'fname' => $row['fname'],
+                'middlename' => $row['middlename'],
+                'lname' => $row['lname'],
                 'birth_place' => $row['birth_place'],
                 'gender' => $row['gender'],
                 'dob' => $row['dob'],
+                'age'=> $row['age'],
                 'contact' => $row['contact'],
                 'email' => $row['email'],
                 'address' => $row['address'],
                 'user_id' => Auth::user()->id,
+                'password' => bcrypt($stdnt.$row['lname']),
                 'student_no' => $stdnt
             ]),
             // Student::create([

@@ -35,7 +35,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- Charts -->
-<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8') }}">
-</script>
+<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
+<script type="{{ asset('https://www.gstatic.com/charts/loader.js') }}"></script>
 {{-- pop-up --}}
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js') }}"></script>
+
+<script type="{{ asset('https://www.gstatic.com/charts/loader.js')}}"></script>
+
+
+{{-- profile --}}

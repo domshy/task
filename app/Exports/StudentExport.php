@@ -13,10 +13,13 @@ class StudentExport implements FromCollection, WithHeadings
     {
         return [
             'student_no',
-            'fullname',
+            'fname',
+            'middlename',
+            'lname',
             'birth_place',
             'gender',
             'dob',
+            'age',
             'contact',
             'email',
             'address',
@@ -31,11 +34,13 @@ class StudentExport implements FromCollection, WithHeadings
     {
         return Student::all(
             'student_no',
-            'fullname',
+            'fname',
+            'middlename',
+            'lname',
             'birth_place',
             'gender',
             'dob',
-
+            'age',
             'contact',
             'email',
             'address',

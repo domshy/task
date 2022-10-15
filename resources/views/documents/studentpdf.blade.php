@@ -60,6 +60,7 @@
                 <th>Name</th>
                 <th>Gender</th>
                 <th>Birthday</th>
+                <th>Age</th>
                 <th>Address</th>
                 <th>Contact</th>
                 <th>Email</th>
@@ -68,9 +69,10 @@
         <tbody>
             @foreach ($students as $student)
                 <tr>
-                    <td>{{ $student->fullname }}</td>
+                    <td>{{ $student->fname . $student->middlename . $student->lname }}</td>
                     <td>{{ $student->gender }}</td>
                     <td>{{ $student->dob }}</td>
+                    <td>{{ $student->age }}</td>
                     <td>{{ $student->address }}</td>
                     <td>{{ $student->contact }}</td>
                     <td>{{ $student->email }}</td>
